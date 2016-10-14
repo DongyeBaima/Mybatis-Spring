@@ -27,4 +27,20 @@
         </foreach>
     </insert>
 
+    <!-- 多参数 封装成Map -->
+    <insert id="insert" parameterType="java.util.Map" flushCache="true">
+        INSERT INTO USER (user_name , password) VALUES (#{userName},#{password})
+    </insert>
+
+
+    <!-- 多参数 且 包含list情况
+            1:在DAO中参数使用 注解Param标注
+     -->
+    <insert id="insertMutiParam">
+        insert into USER (user_name,password) values
+        <foreach collection="data" item="item" index="index"
+                 separator=",">
+            (#{item.userName,jdbcType=CHAR},#{item.password,jdbcType=CHAR})
+        </foreach>
+    </insert>
 </mapper>

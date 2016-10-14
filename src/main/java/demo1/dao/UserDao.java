@@ -1,6 +1,9 @@
 package demo1.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
+import java.util.Map;
 
 import demo1.model.User;
 
@@ -22,4 +25,15 @@ public interface UserDao {
     void deleteUser(int userId);
 
     int batchInsert(List<User> list);
+
+
+    /**
+     * 多参数封装成Map
+     */
+    int insert(Map<String, Object> map);
+
+    /**
+     * 多参数 包含list
+     */
+    int insertMutiParam(@Param("data") List<User> list, String s);
 }

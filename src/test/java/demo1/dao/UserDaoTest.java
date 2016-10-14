@@ -7,7 +7,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import demo1.model.User;
 
@@ -34,6 +36,15 @@ public class UserDaoTest {
         user.setUserName("wang");
         user.setPassword("pwd");
         userDao.addUser(user);
+    }
+
+    @Test
+    public void insertTest() throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("userName", "wang323");
+        map.put("password", "pwd");
+
+        userDao.insert(map);
     }
 
     @Test
@@ -66,7 +77,24 @@ public class UserDaoTest {
         user.setId(3);
 
         userDao.batchInsert(list);
-
     }
+
+    @Test
+    public void insertMutiParam() {
+        List<User> list = new ArrayList<User>();
+        User user = new User();
+        list.add(user);
+        user.setPassword("pwd5");
+        user.setUserName("wang5");
+        user.setId(2);
+        user = new User();
+        list.add(user);
+        user.setPassword("pwd6");
+        user.setUserName("wang6");
+        user.setId(3);
+
+        userDao.insertMutiParam(list,"");
+    }
+
 
 }
